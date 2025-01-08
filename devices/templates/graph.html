@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Device Graph</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="deviceGraph"></canvas>
+    <script>
+        // Use the 'readings' variable passed from the Django view
+        const data = { readings, safe };
+        const labels = data.map(item => item.timestamp);  // X-axis (timestamps)
+        const values = data.map(item => item.value);      // Y-axis (readings)
+
+        // Create the chart
+        new Chart(document.getElementById('deviceGraph'), {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Readings',
+                    data: values,
+                    borderColor: 'rgba(75, 192, 192, 1)',  // Line color
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: { title: { display: true, text: 'Time' } },
+                    y: { title: { display: true, text: 'Value' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
